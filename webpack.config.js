@@ -1,20 +1,19 @@
+const path = require('path');
+const BUILD_FOLDER = 'dist';
+
 module.exports = {
 	entry: "./src/index.js",
 	output: {
-		path: "dist",
+		path: path.resolve(__dirname, BUILD_FOLDER),
 		filename: "bundle.js",
 		libraryTarget: "umd"
 	},
 	module: {
-		loaders: [{
+		rules: [{
 			test: /\.js$/,
-			exclude: /(node_modules|bower_components)/,
-			loader: "babel",
-			query: {
-				presets: ["es2015", "react"],
-				plugins: [
-					["transform-react-jsx", { "pragma":"h" }]
-				]
+	        include: path.resolve(__dirname, 'src'),
+			use: {
+				loader: 'babel-loader',
 			},
 		}]
 	},
