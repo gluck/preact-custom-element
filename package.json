@@ -1,9 +1,9 @@
 {
-  "name": "preact-custom-element",
-  "version": "3.0.0",
+  "name": "@gluck/preact-custom-element",
+  "version": "3.1.0",
   "description": "Wrap your component up as a custom element",
   "main": "dist/bundle.js",
-  "jsnext:main": "src/index.js",
+  "module": "src/index.js",
   "scripts": {
     "prepare": "NODE_ENV=production webpack -p",
     "test": "karma start"
@@ -22,9 +22,9 @@
   "author": "Bradley J. Spaulding",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bspaulding/preact-custom-element/issues"
+    "url": "https://github.com/gluck/preact-custom-element/issues"
   },
-  "homepage": "https://github.com/bspaulding/preact-custom-element#readme",
+  "homepage": "https://github.com/gluck/preact-custom-element#readme",
   "devDependencies": {
     "babel": "6.5.2",
     "babel-core": "6.10.4",

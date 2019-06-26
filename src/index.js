@@ -5,9 +5,10 @@ const camelize = str =>
 
 const Empty = () => null;
 
-export default function register(Component, tagName, propNames) {
+export function createCustomElement(Component, propNames) {
   function PreactCustomElement() {
     const self = Reflect.construct(HTMLElement, [], PreactCustomElement);
+    const shadow = self.attachShadow({ mode: "open" });
     self._vdomComponent = Component;
     return self;
   }
@@ -32,18 +33,24 @@ export default function register(Component, tagName, propNames) {
     get: () => propNames,
   });
 
+  return PreactCustomElement;
+}
+
+export function registerCustomElement(Component, tagName, propNames) {
   return customElements.define(
     tagName || Component.displayName || Component.name,
-    PreactCustomElement,
+    createCustomElement(Component, propNames),
   );
 }
 
+export default registerCustomElement;
+
 function renderElement() {
-  this._root = render(toVdom(this, this._vdomComponent), this, this._root);
+  this._root = render(toVdom(this, this._vdomComponent), this.shadowRoot, this._root);
 }
 
 function unRenderElement() {
-  render(h(Empty), this, this._root);
+  render(h(Empty), this.shadowRoot, this._root);
 }
 
 function toVdom(element, nodeName) {
