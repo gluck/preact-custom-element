@@ -4,20 +4,24 @@
 [![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=VHpBSXVTajJPOWl5OURJRlY5VE9yaW9hbmh1ZFBXd1BTY1pId3pHQk02MD0tLUNqd0pMaVVvU3ppWnZuSFA3OExvOHc9PQ==--81bc10ad2712a85711a0999c04adeca09cf61b7b%)](https://www.browserstack.com/automate/public-build/VHpBSXVTajJPOWl5OURJRlY5VE9yaW9hbmh1ZFBXd1BTY1pId3pHQk02MD0tLUNqd0pMaVVvU3ppWnZuSFA3OExvOHc9PQ==--81bc10ad2712a85711a0999c04adeca09cf61b7b%)
 
 Generate/register a custom element from a preact component. As of 3.0.0, this library implements the Custom Elements v1 spec.
-Previous versions (< 3.0.0) implemented the v0 proposal, which was only implemented in Chrome and is abandoned.
+Renders Preact component in a custom element shadow dom.
 
 ## Usage
 
-Import `CustomElement` and call with your component a tag name __\*__, and a list of attribute names you want to observe:
+```
+npm install --save @wcd/preact-custom-element
+```
 
 ```javascript
-import registerCustomElement from "preact-custom-element";
+import { registerCustomElement, createCustomElement } from "@wcd/preact-custom-element";
 
 const Greeting = ({ name = "World" }) => (
 	<p>Hello, {name}!</p>
 );
 
 registerCustomElement(Greeting, "x-greeting", ["name"]);
+// or just createCustomElement(Greeting, ["name"])
+// which you can later register/define with the tag name of your choosing
 ```
 
 > _**\* Note:** as per the [Custom Elements specification](http://w3c.github.io/webcomponents/spec/custom/#prod-potentialcustomelementname), the tag name must contain a hyphen._
@@ -39,10 +43,6 @@ Output:
 The Custom Elements V1 spec requires you to explictly state the attribute names you want to observe. From your Preact component perspective, `props` could be an object with any keys at runtime. This unfortunate combination of factors leaves us needing to explicitly state them.
 
 It's possible that a compile step could introspect your usages of props and generate the glue code here. Please send me a link if you do this!
-
-## Related
-
-[preact-shadow-dom](https://github.com/bspaulding/preact-shadow-dom)
 
 ## Thanks
 
