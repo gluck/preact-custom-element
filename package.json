@@ -1,9 +1,10 @@
 {
   "name": "@wcd/preact-custom-element",
-  "version": "3.1.0",
+  "version": "3.1.2",
   "description": "Wrap your component up as a custom element",
   "main": "dist/bundle.js",
   "module": "src/index.js",
+  "typings": "src/index.d.ts",
   "scripts": {
     "prepare": "NODE_ENV=production webpack-cli -p",
     "test": "karma start"
