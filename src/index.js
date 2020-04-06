@@ -1,10 +1,11 @@
 import { h, cloneElement, render, hydrate } from 'preact';
 
-export default function register(Component, tagName, propNames, options) {
+export function createCustomElement(Component, propNames, options) {
 	function PreactElement() {
 		const inst = Reflect.construct(HTMLElement, [], PreactElement);
 		inst._vdomComponent = Component;
-		inst._root = options && options.shadow ? inst.attachShadow({ mode: 'open' }) : inst;
+		inst._root =
+			options && !options.shadow ? inst : inst.attachShadow({ mode: 'open' });
 		return inst;
 	}
 	PreactElement.prototype = Object.create(HTMLElement.prototype);
@@ -12,13 +13,22 @@ export default function register(Component, tagName, propNames, options) {
 	PreactElement.prototype.connectedCallback = connectedCallback;
 	PreactElement.prototype.attributeChangedCallback = attributeChangedCallback;
 	PreactElement.prototype.detachedCallback = detachedCallback;
-	PreactElement.observedAttributes = propNames || Component.observedAttributes || Object.keys(Component.propTypes || {});
+	PreactElement.observedAttributes =
+		propNames ||
+		Component.observedAttributes ||
+		Object.keys(Component.propTypes || {});
 
+	return PreactElement;
+}
+
+export function registerCustomElement(Component, tagName, propNames, options) {
 	return customElements.define(
 		tagName || Component.tagName || Component.displayName || Component.name,
-		PreactElement
+		createCustomElement(Component, propNames, options)
 	);
 }
+
+export default registerCustomElement;
 
 function connectedCallback() {
 	this._vdom = toVdom(this, this._vdomComponent);
@@ -34,7 +44,7 @@ function attributeChangedCallback(name, oldValue, newValue) {
 }
 
 function detachedCallback() {
-	render(this._vdom = null, this._root);
+	render((this._vdom = null), this._root);
 }
 
 function toVdom(element, nodeName) {

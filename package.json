@@ -1,11 +1,12 @@
 {
-  "name": "preact-custom-element",
-  "version": "3.0.0",
+  "name": "@gluck/preact-custom-element",
+  "version": "3.1.3",
   "description": "Wrap your component up as a custom element",
   "main": "dist/preact-custom-element.js",
   "module": "dist/preact-custom-element.esm.js",
   "unpkg": "dist/preact-custom-element.umd.js",
   "source": "src/index.js",
+  "typings": "src/index.d.ts",
   "scripts": {
     "prepare": "microbundle",
     "test": "karmatic",
@@ -15,7 +16,7 @@
   "eslintConfig": {
     "extends": "developit"
   },
-  "repository": "preactjs/preact-custom-element",
+  "repository": "webcomponents-dev/preact-custom-element",
   "keywords": [
     "preact",
     "web",
@@ -28,8 +29,8 @@
     "The Preact Authors (https://preactjs.com)"
   ],
   "license": "MIT",
-  "bugs": "https://github.com/preactjs/preact-custom-element/issues",
-  "homepage": "https://github.com/preactjs/preact-custom-element",
+  "bugs": "https://github.com/webcomponents-dev/preact-custom-element/issues",
+  "homepage": "https://github.com/webcomponents-dev/preact-custom-element",
   "peerDependencies": {
     "preact": "^10"
   },

@@ -2,7 +2,7 @@ import assert from 'assert';
 import { h } from 'preact';
 import registerElement from './index';
 
-function Clock ({ time }) {
+function Clock({ time }) {
 	return <span>{time}</span>;
 }
 
